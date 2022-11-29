@@ -2,6 +2,8 @@ const express = require("express");
 const { Property } = require("../../models/index");
 const router = express.Router();
 
+//BUSQUEDA DE UNA PROPIEDAD POR "ID" - USER y ADMIN
+//http://localhost:8000/api/property/:id
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   Property.findOne({
@@ -13,10 +15,14 @@ router.get("/:id", (req, res) => {
   });
 });
 
+//BUSQUEDA DE TODAS LAS PROPIEDADES LISTADAS - USER y ADMIN
+//http://localhost:8000/api/property
 router.get("/", (req, res) => {
-  Property.findAll().then((products) => res.send(products));
+  Property.findAll().then((property) => res.send(property));
 });
 
+//MODIFICACION DE UNA PROPIEDAD - SOLO ADMIN
+//http://localhost:8000/api/property/:id
 router.patch("/:id", (req, res) => {
   const { id } = req.params;
   Property.update(req.body, {
@@ -29,10 +35,14 @@ router.patch("/:id", (req, res) => {
   });
 });
 
+//PUBLICACION DE UNA PROPIEDAD - SOLO ADMIN
+//http://localhost:8000/api/property/add
 router.post("/add", (req, res) => {
   Property.create(req.body).then((property) => res.status(201).send(property));
 });
 
+//ELIMINACION DE UNA PROPIEDAD - SOLO ADMIN
+//http://localhost:8000/api/property/:id
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
   Property.destroy({ where: { id } }).then(() => res.sendStatus(204));
@@ -40,7 +50,8 @@ router.delete("/:id", (req, res) => {
 
 module.exports = router;
 
-// {"image": "https://dictionary.cambridge.org/es/images/full/house_noun_002_18270.jpg?version=5.0.274",
+// {
+//   "image": "https://dictionary.cambridge.org/es/images/full/house_noun_002_18270.jpg?version=5.0.274",
 // "address": "armenia 1000",
 // "price": 200000,
 // "city": "buenos aires",
