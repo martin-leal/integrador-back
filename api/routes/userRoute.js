@@ -74,19 +74,9 @@ router.patch("/:id", (req, res) => {
 
 //LOGOUT DE USUARIO
 //http://localhost:8000/api/user/logout
-router.post("/logout", (req, res) => {
+router.get("/logout", (req, res) => {
   res.clearCookie("token");
   res.sendStatus(204);
-});
-
-//VER FAVORITOS DE USUARIO (DEBERIA IR A LA TABLA DE FAVORITES????)
-//http://localhost:8000/api/user/favorites
-router.get("/favorites", (req, res) => {
-  //Primero deberia validar al usuario con la cookie
-  const token = req.cookies.token;
-  const payload = validateToken(token);
-  // Aca abajo deberia completarlo con la logica que me lleve a sus favoritos
-  res.send(payload);
 });
 
 // RUTA DE PERSISTENCIA "ME"
