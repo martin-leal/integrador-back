@@ -1,5 +1,6 @@
 const S = require("sequelize");
 const db = require("../db/index");
+const Op = S.Op;
 
 class Property extends S.Model {} // propiedades
 
